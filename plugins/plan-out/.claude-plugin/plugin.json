@@ -1,0 +1,10 @@
+{
+  "name": "plan-out",
+  "description": "Plan big features as small, non-contradicting spec modules with a decision log, keep them consistent as plans change, and clean up docs that have drifted out of sync.",
+  "version": "0.1.0",
+  "author": { "name": "Prateek Bisht" },
+  "homepage": "https://github.com/prateekbisht23/plan-out",
+  "repository": "https://github.com/prateekbisht23/plan-out",
+  "license": "MIT",
+  "keywords": ["planning", "spec", "documentation", "adr", "decision-log", "architecture"]
+}
