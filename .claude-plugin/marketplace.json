@@ -1,0 +1,12 @@
+{
+  "name": "plan-out",
+  "description": "plan-out: modular feature planning that keeps docs from contradicting each other",
+  "owner": { "name": "Prateek Bisht" },
+  "plugins": [
+    {
+      "name": "plan-out",
+      "source": "./plugins/plan-out",
+      "description": "Plan big features as small, non-contradicting spec modules with a decision log, and clean up docs that have drifted out of sync."
+    }
+  ]
+}

@@ -40,34 +40,65 @@ See [`examples/sample-docs`](examples/sample-docs) for a small worked example th
 
 ## Install
 
-Copy the `plan-out/` folder into a skills directory:
+### Claude Code (recommended)
 
-- **Claude Code, for all projects:** `~/.claude/skills/plan-out/`
-- **Claude Code, one project:** `<project>/.claude/skills/plan-out/`
-- **Claude.ai:** upload the packaged `plan-out.skill` file in the skills section of your settings
+Run these inside Claude Code:
 
-Skill locations and upload steps change over time; check Anthropic's current documentation if these don't match your version.
+```
+/plugin marketplace add prateekbisht23/plan-out
+/plugin install plan-out@plan-out
+```
+
+The first command registers this repo as a marketplace. The second installs the plugin. To update later: `/plugin marketplace update plan-out`.
+
+Or from your shell, without opening a session:
+
+```
+claude plugin marketplace add prateekbisht23/plan-out
+claude plugin install plan-out@plan-out
+```
+
+Once installed you don't need to invoke anything. The skill triggers on its own when you talk about planning a feature, changing a plan, or cleaning up docs.
+
+### Manual install (no plugin system)
+
+Copy the skill folder into a skills directory:
+
+```
+git clone https://github.com/prateekbisht23/plan-out
+cp -r plan-out/plugins/plan-out/skills/plan-out ~/.claude/skills/plan-out      # all projects
+# or: <your-project>/.claude/skills/plan-out                                  # one project
+```
+
+### Claude.ai
+
+Download `plan-out.skill` from the latest [release](../../releases) and upload it in the skills section of your settings.
 
 Cleanup and update modes edit files and use git, so they work best in Claude Code or any environment with filesystem access. In a plain chat window the skill can plan and draft but cannot touch your repo.
+
+Install commands and menu names change between Claude Code versions; if something doesn't match, see Anthropic's plugin documentation.
 
 ## The checker
 
 Python 3.8+, standard library only.
 
 ```
-python plan-out/scripts/check.py check   --docs docs        # all consistency checks
-python plan-out/scripts/check.py impact  storage#retention  # what depends on this section
-python plan-out/scripts/check.py archive <feature>          # finish a feature
-python plan-out/scripts/check.py index                      # regenerate docs/README.md
-python plan-out/scripts/check.py ledger  .plan-out/ledger.json   # verify a cleanup
+python plugins/plan-out/skills/plan-out/scripts/check.py check   --docs docs        # all consistency checks
+python plugins/plan-out/skills/plan-out/scripts/check.py impact  storage#retention  # what depends on this section
+python plugins/plan-out/skills/plan-out/scripts/check.py archive <feature>          # finish a feature
+python plugins/plan-out/skills/plan-out/scripts/check.py index                      # regenerate docs/README.md
+python plugins/plan-out/skills/plan-out/scripts/check.py ledger  .plan-out/ledger.json   # verify a cleanup
 ```
 
 ## Repo layout
 
 ```
-plan-out/            the skill (SKILL.md, references/, assets/templates/, scripts/)
-examples/            sample output
-evals/               test prompts for developing the skill
+.claude-plugin/marketplace.json     makes this repo installable as a Claude Code marketplace
+plugins/plan-out/
+  .claude-plugin/plugin.json        plugin manifest
+  skills/plan-out/                  the skill (SKILL.md, references/, assets/templates/, scripts/)
+examples/                           sample output
+evals/                              test prompts for developing the skill
 ```
 
 ## License
