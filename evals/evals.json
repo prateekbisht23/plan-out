@@ -1,0 +1,33 @@
+{
+  "skill_name": "plan-out",
+  "evals": [
+    {
+      "id": 1,
+      "name": "vague-feature-intake",
+      "prompt": "I want users of my SaaS dashboard to be able to upload files and have an AI summarise them. Help me plan this out.",
+      "expected_output": "Plays back understanding in plain language and waits for confirmation before anything else; then asks batched clarifying questions with recommended answers; does not write files before module breakdown is approved.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "detailed-spec-to-modules",
+      "prompt": "Plan this: multi-tenant invoicing. Postgres, one schema per tenant. Invoices are created from approved timesheets, PDFs rendered async by a worker queue and stored in S3 (private, presigned URLs). Stripe for payment with webhooks; retries with exponential backoff, max 5. Roles: admin, accountant, viewer. Expect 50k invoices/month. Overdue reminders at 7 and 14 days by email.",
+      "expected_output": "Plays back, asks only about real gaps (e.g. tax, currency, failure handling), proposes several modules with clear ownership, then writes modules, decisions.md and tasks; check.py passes with no errors.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "update-contradicting-decision",
+      "prompt": "The upload limit should be 100 MB now, not 25 MB. Update the plan.",
+      "expected_output": "Runs impact analysis, adds a new decision superseding D-003 rather than editing it, edits only the owning section, checks dependents link rather than restate, flags or adds tasks, and check.py passes.",
+      "files": ["examples/sample-docs"]
+    },
+    {
+      "id": 4,
+      "name": "cluttered-docs-cleanup",
+      "prompt": "Our docs folder is a mess, different files say different things about the same features. Clean it up.",
+      "expected_output": "Starts with a read-only inventory and asks what ambiguous folders/files mean; extracts claims to a ledger; presents conflicts for the user to decide instead of resolving them; makes no changes before mapping approval.",
+      "files": []
+    }
+  ]
+}
